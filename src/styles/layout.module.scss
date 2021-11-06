@@ -1,0 +1,103 @@
+@import './var.scss';
+
+.layout {
+  font-size: 0.9rem;
+
+  .left {
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    left: 3rem;
+    height: 80vh;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    nav:nth-child(2) {
+      ul {
+        height: 60vh;
+        width: 3rem;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: center;
+        li {
+          transform: rotate(-90deg);
+          a {
+            position: relative;
+          }
+          a::before {
+            content: '';
+            z-index: -1;
+            position: absolute;
+            right: -30%;
+            top: -20%;
+            height: 80%;
+            width: 100%;
+            opacity: 0;
+            border-radius: 0 5px 0 0;
+            border-top: 2px solid var(--currentColor);
+            border-right: 2px solid var(--currentColor);
+            transition: 400ms;
+          }
+          a:hover::before {
+            opacity: 1;
+          }
+          p {
+            transform: rotate(90deg);
+
+            font-family: $font-logo;
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+    nav:nth-child(1) {
+      ul {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: center;
+        height: 10vh;
+        width: 3rem;
+        height: 100%;
+      }
+    }
+  }
+  .right {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    div {
+        border-radius: 5px;
+      width: 1.7rem;
+      height: 1.7rem;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    div:nth-child(1) {
+      background: $orange;
+    }
+    div:nth-child(1):hover {
+      background: $orange-hover;
+    }
+    div:nth-child(2) {
+      background: $red;
+    }
+    div:nth-child(2):hover {
+      background: $red-hover;
+    }
+    div:nth-child(3) {
+      background: $blue;
+    }
+    div:nth-child(3):hover {
+      background: $blue-hover;
+    }
+    div:nth-child(4) {
+      background: $purple;
+    }
+    div:nth-child(4):hover {
+      background: $purple-hover;
+    }
+  }
+}
