@@ -15,8 +15,11 @@
   },
   "dependencies": {
     "gatsby": "^4.1.0",
+    "gatsby-plugin-sass": "^5.1.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "sass": "^1.43.4",
+    "scss": "^0.2.4"
   },
   "devDependencies": {
     "prettier": "^2.4.1"

@@ -1,5 +1,15 @@
-import React from "react"
+import React from 'react'
+import Hero from '../components/Hero'
+import '../styles/global.scss'
 
 export default function Home() {
-  return <div>Hello world!</div>
+  return (
+    <>
+      <Hero />
+      <div>Henlo</div>
+      <div>Henlo</div>
+      <div>Henlo</div>
+      <div>Henlo</div>
+    </>
+  )
 }
