@@ -14,15 +14,22 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
+    "@react-three/drei": "^7.20.5",
+    "drei": "^2.2.21",
     "gatsby": "^4.1.0",
     "gatsby-plugin-sass": "^5.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-three-fiber": "^6.0.13",
     "sass": "^1.43.4",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "three": "^0.134.0",
+    "three-geojson-geometry": "^1.1.6",
+    "use-cannon": "^0.5.3"
   },
   "devDependencies": {
+    "eslint-config-react-app": "^6.0.0",
     "prettier": "^2.4.1"
   },
   "repository": {
