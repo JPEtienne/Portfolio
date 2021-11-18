@@ -60,9 +60,9 @@ export default function AnimationCanvas() {
       colorManagement={false}
       camera={{ position: [100, 10, 0], fov: 75 }}
     >
-      <Suspense fallback={null}>
         <Points />
-      </Suspense>
+      {/* <Suspense fallback={null}>
+      </Suspense> */}
     </Canvas>
   )
 }
