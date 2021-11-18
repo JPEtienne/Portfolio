@@ -1,4 +1,11 @@
-import React, { Suspense, useMemo, useCallback, useRef } from 'react'
+import React, {
+  Suspense,
+  useMemo,
+  useCallback,
+  useRef,
+  useEffect,
+  useState,
+} from 'react'
 import {
   Canvas,
   extend,
@@ -9,9 +16,17 @@ import {
 import * as THREE from 'three'
 import circleImg from '../assets/circle.png'
 
-function Points() {
+function Points({ color = '#f19232' }) {
   const imgTexture = useLoader(THREE.TextureLoader, circleImg)
   const bufferRef = useRef()
+  const [graphState, setGraphState] = useState()
+
+  useEffect(() => {
+    console.log('----')
+    console.log(color)
+    console.log('----')
+    console.log(`0x${color.toString().substring(1)}`)
+  }, [color])
 
   let t = 0
   let f = 0.8
@@ -37,7 +52,6 @@ function Points() {
         positions.push(x, y, z)
       }
     }
-
     return new Float32Array(positions)
   }, [count, separation, graph])
 
@@ -56,6 +70,22 @@ function Points() {
     bufferRef.current.needsUpdate = true
   })
 
+  useEffect(() => {
+    let positions = []
+
+    for (let xi = 0; xi < count; xi++) {
+      for (let zi = 0; zi < count; zi++) {
+        let x = separation * (xi - count / 2)
+        let z = separation * (zi - count / 2)
+        let y = graph(x, z)
+        positions.push(x, y, z)
+      }
+    }
+    // setGraphState(positions)
+    return new Float32Array(positions)
+  }, [color])
+
+  // 0xf19232
   return (
     <points>
       <bufferGeometry attach="geometry">
@@ -71,7 +101,7 @@ function Points() {
       <pointsMaterial
         attach="material"
         map={imgTexture}
-        color={0xf19232}
+        color={parseInt(`0x${color.toString().substring(1)}`)}
         size={0.5}
         sizeAttenuation
         transparent={false}
@@ -82,10 +112,10 @@ function Points() {
   )
 }
 
-export default function AnimationCanvas() {
+export default function AnimationCanvas({ color }) {
   return (
     <Canvas colorManagement={false} camera={{ position: [50, 35, 90], fov: 5 }}>
-      <Points />
+      <Points color={color} />
       {/* <Suspense fallback={null}>
       </Suspense> */}
     </Canvas>
