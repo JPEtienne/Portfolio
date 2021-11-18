@@ -1,0 +1,19 @@
+$main-background: #111111;
+$orange: #f0861a;
+$red: #f80735;
+$blue: #47bfd9;
+$purple: #be6bff;
+
+$orange-hover: #f19232;
+$red-hover: #fa1d46;
+$blue-hover: #57c9e2;
+$purple-hover:#c288ee;
+
+$basic-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+$font: Saira, $basic-font;
+$font-logo: Satisfy, $basic-font;
+
+:root {
+  --currentColor: #f0861a;
+}
