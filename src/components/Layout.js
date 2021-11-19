@@ -5,22 +5,28 @@ import React from 'react'
 export default function Layout() {
   const changeStyle = (color) => {
     let desiredColor
+    let desiredHover
     switch (color) {
       case 1:
         desiredColor = '#f0861a'
+        desiredHover = '#f19232'
         break
       case 2:
         desiredColor = '#f80735'
+        desiredHover = '#fa1d46'
         break
       case 3:
         desiredColor = '#47bfd9'
+        desiredHover = '#57c9e2'
         break
       case 4:
         desiredColor = '#be6bff'
+        desiredHover = '#c288ee'
         break
     }
     sessionStorage.setItem('color', desiredColor)
     document.documentElement.style.setProperty('--currentColor', desiredColor)
+    document.documentElement.style.setProperty('--currentColorHover', desiredHover)
   }
 
   return (

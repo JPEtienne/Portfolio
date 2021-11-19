@@ -28,9 +28,7 @@
         align-items: flex-start;
         width: 90%;
         height: 12rem;
-        // background: red;
         justify-content: space-between;
-        // background: red;
         h1,
         h2 {
           font-weight: normal;
@@ -48,6 +46,10 @@
           padding: 0.4rem 1.5rem;
           border-radius: 50px;
           background: var(--currentColor);
+          transition: 200ms;
+        }
+        .hero-contact:hover {
+          background: var(--currentColorHover);
         }
       }
     }

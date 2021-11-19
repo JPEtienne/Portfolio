@@ -29,7 +29,7 @@ export default function Hero({ color }) {
               <h2>REACT</h2>
               <h2 style={{ display: 'none' }}>VUE</h2>
             </div>
-            <a type="button" className={s.heroContact}>
+            <a href="#" className={s.heroContact}>
               Contact me
             </a>
           </motion.div>
