@@ -1,36 +1,17 @@
-import React, {
-  Suspense,
-  useMemo,
-  useCallback,
-  useRef,
-  useEffect,
-  useState,
-} from 'react'
-import {
-  Canvas,
-  extend,
-  useFrame,
-  useLoader,
-  useThree,
-} from 'react-three-fiber'
+import React, { useMemo, useCallback, useRef } from 'react'
+import { Canvas, useFrame, useLoader } from 'react-three-fiber'
 import * as THREE from 'three'
 import circleImg from '../assets/circle.png'
+import * as s from '../styles/scene.module.scss'
 
-function Points({ color = '#f19232' }) {
+function Points() {
   const imgTexture = useLoader(THREE.TextureLoader, circleImg)
+  const materialRef = useRef()
   const bufferRef = useRef()
-  const [graphState, setGraphState] = useState()
-
-  useEffect(() => {
-    console.log('----')
-    console.log(color)
-    console.log('----')
-    console.log(`0x${color.toString().substring(1)}`)
-  }, [color])
 
   let t = 0
   let f = 0.8
-  let a = 0.5
+  let a = 0.2
 
   const graph = useCallback(
     (x, y) => {
@@ -39,7 +20,7 @@ function Points({ color = '#f19232' }) {
     [t, f, a]
   )
 
-  const count = 30
+  const count = 40
   const separation = 0.5
   let positions = useMemo(() => {
     let positions = []
@@ -55,37 +36,41 @@ function Points({ color = '#f19232' }) {
     return new Float32Array(positions)
   }, [count, separation, graph])
 
+  function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
+      : null
+  }
+
   useFrame(() => {
     t += 0.01
     const positions = bufferRef.current.array
+    const currentColors = materialRef.current.color
+    const sColor = sessionStorage.getItem('color')
+    if (sColor) {
+      const { r, g, b } = hexToRgb(sColor)
+      currentColors.r = (r / 255) * 2
+      currentColors.g = (g / 255) * 0.6
+      currentColors.b = (b / 255) * 1
+    }
     let i = 0
     for (let xi = 0; xi < count; xi++) {
       for (let zi = 0; zi < count; zi++) {
-        let x = separation * (xi - count / 2)
+        let x = separation * (xi - count / -2)
         let z = separation * (zi - count / 2)
         positions[i + 1] = graph(x, z)
         i += 3
       }
     }
+    materialRef.current.needsUpdate = true
     bufferRef.current.needsUpdate = true
   })
 
-  useEffect(() => {
-    let positions = []
-
-    for (let xi = 0; xi < count; xi++) {
-      for (let zi = 0; zi < count; zi++) {
-        let x = separation * (xi - count / 2)
-        let z = separation * (zi - count / 2)
-        let y = graph(x, z)
-        positions.push(x, y, z)
-      }
-    }
-    // setGraphState(positions)
-    return new Float32Array(positions)
-  }, [color])
-
-  // 0xf19232
   return (
     <points>
       <bufferGeometry attach="geometry">
@@ -99,9 +84,10 @@ function Points({ color = '#f19232' }) {
       </bufferGeometry>
 
       <pointsMaterial
+        ref={materialRef}
         attach="material"
         map={imgTexture}
-        color={parseInt(`0x${color.toString().substring(1)}`)}
+        color={0xf0861a}
         size={0.5}
         sizeAttenuation
         transparent={false}
@@ -112,10 +98,10 @@ function Points({ color = '#f19232' }) {
   )
 }
 
-export default function AnimationCanvas({ color }) {
+export default function AnimationCanvas() {
   return (
-    <Canvas colorManagement={false} camera={{ position: [50, 35, 90], fov: 5 }}>
-      <Points color={color} />
+    <Canvas colorManagement={false} camera={{ position: [50, 15, 90], fov: 6 }} className={s.scene}>
+      <Points />
       {/* <Suspense fallback={null}>
       </Suspense> */}
     </Canvas>
