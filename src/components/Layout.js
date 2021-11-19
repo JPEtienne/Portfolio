@@ -1,7 +1,7 @@
 import React from 'react'
 import * as s from '../styles/layout.module.scss'
 
-export default function Layout({ colorToParent }) {
+export default function Layout() {
   const changeStyle = (color) => {
     let desiredColor
     switch (color) {
@@ -18,7 +18,7 @@ export default function Layout({ colorToParent }) {
         desiredColor = '#be6bff'
         break
     }
-    colorToParent(desiredColor)
+    sessionStorage.setItem('color', desiredColor)
     document.documentElement.style.setProperty('--currentColor', desiredColor)
   }
 
