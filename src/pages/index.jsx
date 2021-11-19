@@ -9,7 +9,7 @@ import '../styles/global.scss'
 
 export default function Home() {
   const isSSR = typeof window === 'undefined'
-  const sColor = sessionStorage.getItem('color')
+  const sColor = sessionStorage.getItem('color') ?? false
   return (
     <>
       <Helmet>
