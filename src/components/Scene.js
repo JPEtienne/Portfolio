@@ -2,6 +2,7 @@ import React, { useMemo, useCallback, useRef } from 'react'
 import { Canvas, useFrame, useLoader } from 'react-three-fiber'
 import * as THREE from 'three'
 import circleImg from '../assets/circle.png'
+import * as s from '../styles/scene.module.scss'
 
 function Points() {
   const imgTexture = useLoader(THREE.TextureLoader, circleImg)
@@ -10,7 +11,7 @@ function Points() {
 
   let t = 0
   let f = 0.8
-  let a = 0.5
+  let a = 0.2
 
   const graph = useCallback(
     (x, y) => {
@@ -19,7 +20,7 @@ function Points() {
     [t, f, a]
   )
 
-  const count = 30
+  const count = 40
   const separation = 0.5
   let positions = useMemo(() => {
     let positions = []
@@ -61,7 +62,7 @@ function Points() {
     let i = 0
     for (let xi = 0; xi < count; xi++) {
       for (let zi = 0; zi < count; zi++) {
-        let x = separation * (xi - count / 2)
+        let x = separation * (xi - count / -2)
         let z = separation * (zi - count / 2)
         positions[i + 1] = graph(x, z)
         i += 3
@@ -98,10 +99,10 @@ function Points() {
   )
 }
 
-export default function AnimationCanvas({ color }) {
+export default function AnimationCanvas() {
   return (
-    <Canvas colorManagement={false} camera={{ position: [50, 35, 90], fov: 5 }}>
-      <Points color={color} />
+    <Canvas colorManagement={false} camera={{ position: [50, 15, 90], fov: 6 }} className={s.scene}>
+      <Points />
       {/* <Suspense fallback={null}>
       </Suspense> */}
     </Canvas>

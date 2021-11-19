@@ -1,5 +1,6 @@
-import React from 'react'
 import * as s from '../styles/layout.module.scss'
+import { motion } from 'framer-motion'
+import React from 'react'
 
 export default function Layout() {
   const changeStyle = (color) => {
@@ -24,14 +25,27 @@ export default function Layout() {
 
   return (
     <div className={s.layout}>
-      <div className={s.left}>
+      <motion.div
+        initial="hidden"
+        animate="show"
+        variants={{
+          hidden: { opacity: 0, translateY: '-40%' },
+          show: { opacity: 1, translateY: '-50%' },
+        }}
+        transition={{ delay: 0.1, duration: 0.6}}
+        className={s.left}
+      >
         <nav>
           <ul>
             <li>
-              <i className="fab fa-linkedin-in" />
+              <a href="https://bit.ly/3Cxdl9l" target="_blank">
+                <i className="fab fa-linkedin-in" />
+              </a>
             </li>
             <li>
-              <i className="fab fa-github" />
+              <a href="https://bit.ly/3CuDm9b" target="_blank">
+                <i className="fab fa-github" />
+              </a>
             </li>
           </ul>
         </nav>
@@ -54,13 +68,20 @@ export default function Layout() {
             </li>
           </ul>
         </nav>
-      </div>
-      <div className={s.right}>
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        animate="show"
+        variants={{
+          hidden: { opacity: 0, translateY: '-60%' },
+          show: { opacity: 1, translateY: '-50%' },
+        }}
+        transition={{ delay: 0.1, duration: 0.6}} className={s.right}>
         <div onClick={() => changeStyle(1)}></div>
         <div onClick={() => changeStyle(2)}></div>
         <div onClick={() => changeStyle(3)}></div>
         <div onClick={() => changeStyle(4)}></div>
-      </div>
+      </motion.div>
     </div>
   )
 }
