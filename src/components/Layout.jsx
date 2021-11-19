@@ -25,9 +25,16 @@ export default function Layout() {
         break
     }
     sessionStorage.setItem('color', desiredColor)
+    sessionStorage.setItem('colorHover', desiredHover)
     document.documentElement.style.setProperty('--currentColor', desiredColor)
     document.documentElement.style.setProperty('--currentColorHover', desiredHover)
   }
+
+  React.useEffect(() => {
+    if (sessionStorage.getItem('color')) 
+    document.documentElement.style.setProperty('--currentColor', sessionStorage.getItem('color'))
+    document.documentElement.style.setProperty('--currentColorHover', sessionStorage.getItem('colorHover'))
+  }, [])
 
   return (
     <div className={s.layout}>
