@@ -6,27 +6,15 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import {
-  Canvas,
-  extend,
-  useFrame,
-  useLoader,
-  useThree,
-} from 'react-three-fiber'
+import { Canvas, useFrame, useLoader } from 'react-three-fiber'
 import * as THREE from 'three'
+import { Color, Material } from 'three'
 import circleImg from '../assets/circle.png'
 
 function Points({ color = '#f19232' }) {
   const imgTexture = useLoader(THREE.TextureLoader, circleImg)
+  const materialRef = useRef()
   const bufferRef = useRef()
-  const [graphState, setGraphState] = useState()
-
-  useEffect(() => {
-    console.log('----')
-    console.log(color)
-    console.log('----')
-    console.log(`0x${color.toString().substring(1)}`)
-  }, [color])
 
   let t = 0
   let f = 0.8
@@ -55,9 +43,22 @@ function Points({ color = '#f19232' }) {
     return new Float32Array(positions)
   }, [count, separation, graph])
 
+
+  let currentColor = useMemo(() => {
+    let currentColor = color ?? '#f19232'
+    currentColor = parseInt(`0x${currentColor.toString().substring(1)}`)
+    return currentColor 
+  }, [color])
+
   useFrame(() => {
     t += 0.01
     const positions = bufferRef.current.array
+    const currentColor = materialRef.current.color
+
+    // currentColor.r = 3
+    // currentColor.g = 7
+    // currentColor.b = 0.59
+    console.log(materialRef.current)
     let i = 0
     for (let xi = 0; xi < count; xi++) {
       for (let zi = 0; zi < count; zi++) {
@@ -67,25 +68,12 @@ function Points({ color = '#f19232' }) {
         i += 3
       }
     }
+    // currentColor = `0x${color.toString().substring(1)}`
+    // materialRef.current.color = `0x${color.toString().substring(1)}`
+    materialRef.current.needsUpdate = true
     bufferRef.current.needsUpdate = true
   })
 
-  useEffect(() => {
-    let positions = []
-
-    for (let xi = 0; xi < count; xi++) {
-      for (let zi = 0; zi < count; zi++) {
-        let x = separation * (xi - count / 2)
-        let z = separation * (zi - count / 2)
-        let y = graph(x, z)
-        positions.push(x, y, z)
-      }
-    }
-    // setGraphState(positions)
-    return new Float32Array(positions)
-  }, [color])
-
-  // 0xf19232
   return (
     <points>
       <bufferGeometry attach="geometry">
@@ -99,9 +87,10 @@ function Points({ color = '#f19232' }) {
       </bufferGeometry>
 
       <pointsMaterial
+        ref={materialRef}
         attach="material"
         map={imgTexture}
-        color={parseInt(`0x${color.toString().substring(1)}`)}
+        color={currentColor}
         size={0.5}
         sizeAttenuation
         transparent={false}
