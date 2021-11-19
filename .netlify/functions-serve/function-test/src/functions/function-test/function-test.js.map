@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": ["../../root/home/www/portfolio/functions/function-test/function-test.ts"],
+  "sourceRoot": "/tmp/tmp-5835-6t8YxGHg2Ijo",
+  "sourcesContent": ["import { Handler } from '@netlify/functions'\n\nexport const handler: Handler = async (event, context) => {\n  const { name = 'stranger' } = event.queryStringParameters\n\n  return {\n    statusCode: 200,\n    body: JSON.stringify({\n      message: `Hello, ${name}!`,\n    }),\n  }\n}\n"],
+  "mappings": ";;;;;;;;;AAAA;AAAA;AAAA;AAEO,IAAM,UAAmB,OAAO,OAAO,YAAY;AACxD,QAAM,EAAE,OAAO,eAAe,MAAM;AAEpC,SAAO;AAAA,IACL,YAAY;AAAA,IACZ,MAAM,KAAK,UAAU;AAAA,MACnB,SAAS,UAAU;AAAA;AAAA;AAAA;",
+  "names": []
+}

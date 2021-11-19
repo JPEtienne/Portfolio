@@ -14,7 +14,9 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
+    "@netlify/functions": "^0.9.0",
     "@react-three/drei": "^7.20.5",
+    "@types/node": "^14.17.34",
     "dotenv": "^10.0.0",
     "drei": "^2.2.21",
     "framer-motion": "^5.3.1",
@@ -27,11 +29,13 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-loadingg": "^1.7.2",
     "react-three-fiber": "^6.0.13",
     "sass": "^1.43.4",
     "scss": "^0.2.4",
     "three": "^0.134.0",
     "three-geojson-geometry": "^1.1.6",
+    "typescript": "^4.5.2",
     "use-cannon": "^0.5.3"
   },
   "devDependencies": {

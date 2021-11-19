@@ -1,17 +1,12 @@
-import React, { Suspense } from 'react'
 import * as s from '../styles/hero.module.scss'
-import AnimationCanvas from './Scene'
 import { motion } from 'framer-motion'
+import AnimationCanvas from './Scene'
+import React from 'react'
 
 export default function Hero() {
-  const isSSR = typeof window === 'undefined'
   return (
     <section className={s.hero}>
-      {!isSSR && (
-        <Suspense fallback={<div>Loading...</div>}>
-          <AnimationCanvas className="canvas" />
-        </Suspense>
-      )}
+      <AnimationCanvas className="canvas" />
       <div className={s.heroContent}>
         <div className={s.content}>
           <motion.div
