@@ -3,13 +3,13 @@ import * as s from '../styles/hero.module.scss'
 import AnimationCanvas from './Scene'
 import { motion } from 'framer-motion'
 
-export default function Hero({ color }) {
+export default function Hero() {
   const isSSR = typeof window === 'undefined'
   return (
     <section className={s.hero}>
       {!isSSR && (
         <Suspense fallback={<div>Loading...</div>}>
-          <AnimationCanvas className="canvas" color={color} />
+          <AnimationCanvas className="canvas" />
         </Suspense>
       )}
       <div className={s.heroContent}>

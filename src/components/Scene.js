@@ -57,7 +57,6 @@ function Points() {
       currentColors.r = (r / 255) * 2
       currentColors.g = (g / 255) * 0.6
       currentColors.b = (b / 255) * 1
-      console.log(currentColors)
     }
     let i = 0
     for (let xi = 0; xi < count; xi++) {
